@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>03_Object扩展</title>
+</head>
+<body>
+<!--
+    ES5给Object扩展了一些静态方法, 常用的2个:
+    1. Object.create(prototype, descriptors)
+      * 作用: 以指定对象为原型对象创建新的对象
+      * 为新的对象指定新的属性, 并对属性进行描述(“高级定制”)
+        - value : 指定值
+        - writable : 标识当前属性值是否是可修改的, 默认为false
+        - configurable: 标识当前属性是否可以被删除 默认为false
+        - enumerable： 标识当前属性是否能用for in 枚举 默认为false
+        
+    2. Object.defineProperties(object, descriptors)
+        * 作用: 为指定对象定义扩展多个属性
+        * get ：用来获取当前属性值的回调函数
+        * set ：修改当前属性值时触发的回调函数，并且实参即为修改后的值
+        * 存取器：setter,getter一个用来存值，一个用来取值
+-->
+<script type="text/javascript">
+  
+  // 1. Object.create(prototype, descriptors)
+  /*var student = {
+    school:'尚硅谷大学'
+  }
+  
+  
+  var s = Object.create(student,{
+    name:{
+      value:'kobe',
+      writable:true,//是否是可修改的
+      configurable:true,//是否可以被删除
+      enumerable:true//是否能用for in 枚举
+    }
+  })
+  s.name = 'wade'
+  delete s.name
+  console.log(s.name)
+  console.log(s.school)*/
+ 
+  //回顾for in枚举-----不仅可以枚举出自身上的属性，还可以枚举出编码人员在其构造函数原型对象上追加的属性
+  /*function Person(name,age) {
+    this.name = name
+    this.age = age
+  }
+  
+  Person.prototype.speak = function () {
+    console.log(this.name,this.age)
+  }
+ Person.prototype.study = function () {
+   console.log(this.name,this.age)
+ }
+  
+  var p = new Person('kobe',18)
+ 
+  for (var key in p){
+     console.log(p[key])
+  }*/
+  
+  //2.Object.defineProperties
+  var person = {
+    firstName:'张',
+    lastName:'三',
+    sex:'男',
+  }
+  Object.defineProperties(person,{
+    fullName:{
+      //当读取person上的fullName属性时，会触发get方法
+      get:function () {
+        console.log('有人读取了person身上的fullName')
+        return this.firstName + ' ' + this.lastName
+      },
+      //当修改person上的fullName属性时，会触发set方法
+      set:function (data) {
+        console.log('有人修改了person身上的fullName')
+        var nameArr = data.split(' ')
+        this.firstName = nameArr[0]
+        this.lastName = nameArr[1]
+      }
+    },
+    /*sex:{
+      //读sex的时掉调用get
+      get:function () {
+        return '女'
+      },
+      //改sex的时掉调用get
+      set:function (data) {
+        this.sex = data
+      }
+    }*/
+  })
+  
+  /*console.log(person.fullName)//张 三
+  person.firstName = '李'
+  person.lastName = '四'
+  person.fullName = '王 五'
+  console.log(person.firstName)
+  console.log(person.lastName)*/
+  person.sex = '不男不女'
+  console.log(person.sex)
+  
+  
+  
+  
+
+</script>
+</body>
+</html>

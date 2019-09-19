@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    // 1. Object.create(prototype, descriptors)
+    /* var Student = {
+         school: 'atguigu'
+     }
+     var s = Object.create(Student, {
+         name: {
+             value: 'jay',
+             writable: true,//是否可修改
+             configurable: true,//是否可以被删除
+             enumerable: true//是否能用for in 枚举
+         }
+     })
+     s.name = 'jolin'
+     // delete s.name
+     console.log(s);
+     console.log(s.school);
+     console.log(s.name);*/
+
+    //2.Object.defineProperties
+    var Person = {
+        firstName: '张',
+        lastName: '三',
+    }
+    Object.defineProperties(Person, {
+        fullName: {
+            get: function () {
+                return this.firstName + ' ' + this.lastName
+            },
+            set: function (data) {
+                var nameArr = data.split(' ')
+                this.firstName = nameArr[0]
+                this.lastName = nameArr[1]
+            }
+        }
+    })
+    Person.firstName = '李'
+    Person.lastName = '梦'
+    console.log(Person.fullName);
+</script>
+</body>
+</html>

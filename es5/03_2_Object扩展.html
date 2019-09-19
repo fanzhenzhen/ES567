@@ -13,27 +13,21 @@
 -->
 <script type='text/javascript'>
 
-  var person = {
-    firstName:'张',
-    lastName:'三',
-    sex:'男',
-    get fullName(){
-      return this.firstName + ' ' + this.lastName
-    },
-    set fullName(data){
-      var nameArr = data.split(' ')
-      this.firstName =nameArr[0]
-      this.lastName =nameArr[1]
+    var Person = {
+        firstName: '张',
+        lastName: '三',
+        get fullName(){
+            return this.firstName + ' ' + this.lastName
+        },
+        set fullName(data){
+            var nameArr = data.split(' ')
+            this.firstName = nameArr[0]
+            this.lastName = nameArr[1]
+        }
     }
-  }
-  
-  console.log(person)
-  person.firstName = '李'
-  person.fullName = '王 五'
-  console.log(person.firstName)
-  console.log(person.lastName)
- 
-
+    Person.firstName = '李'
+    Person.lastName = '汌'
+    console.log(Person.fullName);
 </script>
 </body>
 </html>
